@@ -483,6 +483,29 @@ const wrappingTextExample = "\x01Title\n\x03Right aligned\n123456789012345678901
 setInterval(setTime, 1000)
 setTime()
 
+const customChar = ref([0,0,0,0,0,0,0,0])
+
+const customCharBin = computed(() =>
+{
+  return customChar.value
+    .map(n => n.toString())
+    .join('')
+})
+
+const customCharRep = computed(() =>
+{
+  const byte = parseInt(customChar.value
+    .map(n => n.toString())
+    .toReversed()
+    .join(''), 2) || 0
+  return String.fromCodePoint(0x2800 + byte)
+})
+
+function addCustomChar()
+{
+  customText.value += customCharRep.value
+}
+
 </script>
 
 <template>
@@ -520,10 +543,21 @@ setTime()
           <label>Remove diacritics: <input type="checkbox" v-model="enableRemovingDiacritics"></label>
         </div>
       </div>
-      <div id="custom-text-section" class="larger-displays">
+      <div id="custom-text-section">
         <div>
           <div>
             <textarea v-model="customText"></textarea>
+          </div>
+          <div>
+            <label>Custom char:</label>
+            <div class="custom-char-bits">
+              <span><sst :text="customCharRep"/></span>
+              <div v-for="n in 8"
+                @click="() => customChar[n-1] = customChar[n-1] ? 0 : 1"
+                :class="'custom-char-bit bit-' + n"></div>
+            </div>
+            <span>{{ customCharBin }}</span>
+            <button @click="addCustomChar">Add</button>
           </div>
           <div>
             <label>Panel width: <input type="number" v-model="customTextWrapLength"></label>
@@ -535,7 +569,7 @@ setTime()
             <label>Justify: <input type="checkbox" v-model="customTextWrapJustify"></label>
           </div>
         </div>
-        <div id="custom-text-output">
+        <div id="custom-text-output" class="larger-displays">
           <sst :color="color" :mode="'wrap'" :sst="generalSss" :text="customTextOutput"
             :length="customTextWrapLength"
             :align="customTextWrapAlign"
@@ -677,6 +711,82 @@ aesthetically pleasing.
 {
   font-size: 20px;
 }
+
+.custom-char-bits
+{
+  font-size: 50px;
+  position: relative;
+  user-select: none;
+}
+
+.custom-char-bit
+{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.custom-char-bit.bit-1,
+.custom-char-bit.bit-4,
+.custom-char-bit.bit-7
+{
+  width: 18px;
+  height: 8px;
+  left: 12px;
+}
+
+.custom-char-bit.bit-7
+{
+  top: 23px;
+}
+
+.custom-char-bit.bit-4
+{
+  top: 46px;
+}
+
+.custom-char-bit.bit-2,
+.custom-char-bit.bit-3,
+.custom-char-bit.bit-5,
+.custom-char-bit.bit-6
+{
+  width: 8px;
+  height: 18px;
+}
+
+.custom-char-bit.bit-2,
+.custom-char-bit.bit-6
+{
+  top: 6px;
+}
+
+.custom-char-bit.bit-3,
+.custom-char-bit.bit-5
+{
+  top: 30px;
+}
+
+.custom-char-bit.bit-5,
+.custom-char-bit.bit-6
+{
+  left: 4px;
+}
+
+.custom-char-bit.bit-2,
+.custom-char-bit.bit-3
+{
+  left: 30px;
+}
+
+.custom-char-bit.bit-8
+{
+  left: 38px;
+  top: 45px;
+
+  width: 8px;
+  height: 8px;
+}
+
 
 .options
 {
