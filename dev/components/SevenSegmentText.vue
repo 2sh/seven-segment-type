@@ -40,12 +40,21 @@ const lines = ref<string[][]>([])
 const textParts = ref<string[]>([])
 //const outParts = ref<string[]>([])
 
+function split(str: string)
+{
+  const arr = [];
+  for (const char of str) {
+    arr.push(char);
+  }
+  return arr;
+}
+
 watch(props, () =>
 {
   if (props.mode == 'individual' || props.mode == 'word')
   {
     textParts.value = props.mode == 'individual'
-      ? props.text.split('')
+      ? split(props.text)
       : props.text.split(/(?<=\s+)/)
     lines.value = [textParts.value.map(text =>
       props.sst.convert(text).toDsegString())]

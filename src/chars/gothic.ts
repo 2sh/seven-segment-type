@@ -1,0 +1,32 @@
+import type { Char } from "../types"
+
+const chars: Char[] = [
+  { chr: "𐌰", pin: 0b11101000 },
+  { chr: "𐌱", pin: 0b01111110 },
+  { chr: "𐌲", pin: 0b10001100 },
+  { chr: "𐌳", pin: 0b11111000 },
+  { chr: "𐌴", pin: 0b10011110 },
+  { chr: "𐌵", pin: 0b01110100 },
+  { chr: "𐌶", pin: 0b11011010 },
+  { chr: "𐌷", pin: 0b00101110 },
+  { chr: "𐌸", pin: 0b01010110 },
+  { chr: "𐌹", pin: 0b01100000 },
+  { chr: "𐌺", pin: 0b10101110 },
+  { chr: "𐌻", pin: 0b11101010 },
+  { chr: "𐌼", pin: 0b10101010 },
+  { chr: "𐌽", pin: 0b01101110 },
+  { chr: "𐌾", pin: 0b10111100 },
+  { chr: "𐌿", pin: 0b10101100 },
+  { chr: "𐍀", pin: 0b11101100 },
+  { chr: "𐍁", pin: 0b01100110 },
+  { chr: "𐍂", pin: 0b11101010 },
+  { chr: "𐍃", pin: 0b10110110 },
+  { chr: "𐍄", pin: 0b11100000 },
+  { chr: "𐍅", pin: 0b01001110 },
+  { chr: "𐍆", pin: 0b10001110 },
+  { chr: "𐍇", pin: 0b00100110 },
+  { chr: "𐍈", pin: 0b11111110 },
+  { chr: "𐍉", pin: 0b11101110 },
+  { chr: "𐍊", pin: 0b11010100 },
+]
+export default chars

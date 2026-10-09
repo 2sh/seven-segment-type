@@ -52,6 +52,7 @@ import numbers from './chars/numerals'
 import latin from './chars/latin'
 import cyrillic from './chars/cyrillic'
 import greek from './chars/greek'
+import gothic from './chars/gothic'
 import cjkPunctuation from './chars/cjk_punctuation'
 import japanese from './chars/japanese'
 import korean from './chars/korean'
@@ -65,6 +66,7 @@ export const libChars: Char[] =
 	...latin,
 	...cyrillic,
 	...greek,
+  ...gothic,
 	...cjkPunctuation,
 	...japanese,
 	...korean,
@@ -218,6 +220,18 @@ function splitInt(number: number, divisions: number): number[]
   }
 
   return out
+}
+
+/*
+UTF-16 aware splitting
+*/
+function splitStr(str: string)
+{
+  const arr = [];
+  for (const char of str) {
+    arr.push(char);
+  }
+  return arr;
 }
 
 function interleave<T>(...arrays: T[][]): T[]
@@ -592,7 +606,7 @@ export default class SevenSegmentType
       })
     }
 
-    const splitText = text.split('')
+    const splitText = splitStr(text)
 
     const resolveChr = (chr: string, index: number): string | string[] =>
     {
@@ -612,7 +626,7 @@ export default class SevenSegmentType
               && isLowerCase(splitText[index+1]!)) ? 1 : 0
             variation = variation[varIndex]
           }
-          return variation.split('').flat()
+          return splitStr(variation).flat()
         }
       }
       return getNormalizedChr(chr) + decimalPointModChar
@@ -623,7 +637,7 @@ export default class SevenSegmentType
 
     // convert text to 7s bytes
     const elements: TextElement[] = []
-    processedText.join("").split('').forEach(chr =>
+    splitStr(processedText.join("")).forEach(chr =>
     {
       const char = this.charMap[chr]
 
