@@ -27,6 +27,6 @@ const chars: Char[] = [
   { chr: "𐍇", pin: 0b00100110 },
   { chr: "𐍈", pin: 0b11111110 },
   { chr: "𐍉", pin: 0b11010110 },
-  { chr: "𐍊", pin: 0b10100100 },
+  { chr: "𐍊", pin: 0b11001000 },
 ]
 export default chars
