@@ -9,6 +9,7 @@ It makes use of a standardized typeface that currently covers the following char
   - **Latin alphabet**, including many supplemental characters and diacritics
   - **Greek alphabet**, including some accented characters
   - **Cyrillic alphabet**, including some supplemental characters
+  - **Gothic alphabet**
 - **Japanese Katakana**, with mappings from Hiragana
 - **Korean Hangul Jamo**
 
